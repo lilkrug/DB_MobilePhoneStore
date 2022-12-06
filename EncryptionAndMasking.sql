@@ -1,17 +1,19 @@
 Use MobilePhone;
 
 --Masking
+select * from worker;
 go
-CREATE USER Test1 WITHOUT LOGIN;  
+CREATE USER Test WITHOUT LOGIN;  
 
 go 
 CREATE USER TestAdmin WITHOUT LOGIN;  
+
 
 ALTER ROLE db_datareader ADD MEMBER Test; 
 ALTER ROLE db_datareader ADD MEMBER TestAdmin;
 
 GRANT UNMASK TO TestAdmin;  
-GRANT SELECT ON Membership TO Test;
+GRANT SELECT ON worker TO Test;
  
 EXECUTE AS USER = 'TestAdmin';  
 SELECT * FROM worker;  
@@ -106,7 +108,7 @@ EXEC MaskAdminClient;
 
 
 ALTER TABLE dbo.good
-ADD description_encrypt varbinary(MAX)
+ADD price_encrypt varbinary(MAX) ----------наъгюрекэмн днаюбхрэ щрс ярпнйс оепед реярхпнбйни лерндю ьхтпнбюмхъ
 
 go
 create procedure Encrypt
@@ -115,11 +117,10 @@ AS BEGIN
         DECRYPTION BY CERTIFICATE Certificate_test;
 
 UPDATE dbo.good
-        SET description_encrypt = EncryptByKey (Key_GUID('SymKey_test'), description)
+        SET price_encrypt = EncryptByKey (Key_GUID('SymKey_test'), price)
         FROM dbo.good;
         
 CLOSE SYMMETRIC KEY SymKey_test;
-ALTER TABLE dbo.good DROP COLUMN description;
 
 END;
 
@@ -134,8 +135,8 @@ AS BEGIN
 	OPEN SYMMETRIC KEY SymKey_test
         DECRYPTION BY CERTIFICATE Certificate_test;
 
-SELECT name, category, price, country, description_encrypt AS 'Encrypted data',
-            CONVERT(varchar, DecryptByKey(description_encrypt)) AS 'Decrypted Bank account number'
+SELECT name, category, country, price_encrypt AS 'Encrypted data',
+            CONVERT(nvarchar, DecryptByKey(price_encrypt)) AS 'Decrypted Bank account number'
             FROM dbo.good;
 
 END;

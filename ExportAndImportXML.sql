@@ -18,7 +18,7 @@ begin
 
 	declare @cmd nvarchar(255);
 	select @cmd = '
-    bcp "use MobileTelephone; select name, category, price, country, description from good for xml path(''good''), root(''goods'')" ' +
+    bcp "use MobilePhone; select name, category, price, country, description from good for xml path(''good''), root(''goods'')" ' +
     'queryout "D:\Education\3 курс 1 сем\Kursach\Export.xml" -S .\SQLEXPRESS -T -w -r -t';
 exec xp_cmdshell @cmd;
 end; 

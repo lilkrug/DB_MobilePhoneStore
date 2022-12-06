@@ -1,29 +1,5 @@
 Use MobilePhone;
 
--- get all good
-go
-Create procedure GET_GOODS
-as begin
-SELECT * from good;
-end;
-
-EXEC GET_GOODS;
---drop procedure GET_GOODS;
-
-
--- get good by name
-go
-Create procedure GET_GOODS_BY_NAME
-@search_text nvarchar(40)
-as begin
-SELECT * from good where (upper(name) like upper(@search_text) + '%');
-end;
-
-declare @param nvarchar(40);
-set @param = 'Apple';
-EXEC GET_GOODS_BY_NAME @param;
---drop procedure GET_GOODS_BY_NAME;
-
 go
 Create procedure GET_GOODS_BY_ID
 @search_id int
@@ -111,7 +87,9 @@ as begin
 delete from client where id_client = @idClient;
 end;
 
-EXEC DELETE_CLIENT_BY_ID;
+declare @ic int;
+--set @ic = 3;      
+EXEC DELETE_CLIENT_BY_ID @ic;
 --drop procedure DELETE_CLIENT_BY_ID;
 
 
@@ -209,7 +187,7 @@ EXEC GET_CLIENT_ORDERS_BY_ID @param;
 
 --get good comments
 go
-Create procedure GET_SERVICE_COMMENTS_BY_ID
+Create procedure GET_GOOD_COMMENTS_BY_ID
 @search_id int
 as begin
 SELECT idClient, message from comment where  idGood = @search_id;
@@ -217,7 +195,7 @@ end;
 
 declare @param nvarchar(40);
 set @param = 1;
-EXEC GET_SERVICE_COMMENTS_BY_ID @param;
+EXEC GET_GOOD_COMMENTS_BY_ID @param;
 --drop procedure GET_GOOD_COMMENTS_BY_ID;
 
 --get count good comments

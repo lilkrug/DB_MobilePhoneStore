@@ -6,7 +6,7 @@ Create Table client
 (
 	id_client int identity(1,1) primary key,
 	secondName nvarchar(50) not null,
-	firstName nvarchar(50) not null,
+	firstName nvarchar(50) not null,	
 	phoneNumber nvarchar(20) MASKED WITH (FUNCTION = 'partial(1,"XXXXXXX",0)') NULL,
 	email nvarchar(50) MASKED WITH (FUNCTION = 'email()') NULL,
 	password nvarchar(60) MASKED WITH (FUNCTION = 'default()') NULL
@@ -33,7 +33,8 @@ Create Table good
 )
 
 insert into good(name, category, price, country, description) 
-	values('Apple', 'Iphone', '650$', 'USA', 'Most popular mobilephone in the world');
+	values('Apple', 'Iphone', '650$', 'USA', 'Most popular mobilephone in the world'),
+		  ('Samsung', 'Galaxy', '350$', 'Korea', 'Very beautiful mobile telephon');
 
 delete from good where id_good = 5;	
 select * from good;
