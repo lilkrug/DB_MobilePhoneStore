@@ -17,3 +17,7 @@ as
 				update timetable_worker set status = 1 where id_freeDateTime = @newIdFreeTime
 			end
 	end
+
+--индекс
+CREATE NONCLUSTERED INDEX IX_tblBook_Name
+ON client(firstName, secondName);

@@ -1,7 +1,5 @@
 Use MobilePhone;
-
-
-
+--’ранимые процедуры позвол€ют объединить последовательность запросов и сохранить их на сервере
 -- поиск товара
 go
 Create procedure GET_GOODS_BY_NAME
@@ -11,7 +9,7 @@ SELECT * from good where (upper(name) like upper(@search_text) + '%');
 end;
 
 declare @param nvarchar(40);
-set @param = 'Apple';
+set @param = 'APPLE';
 EXEC GET_GOODS_BY_NAME @param;
 --drop procedure GET_GOODS_BY_NAME;
 
@@ -40,7 +38,7 @@ set @em = 'тест';
 set @p = 'тест';
 EXEC RegClient @first,@second, @phone, @em, @p;
 --drop procedure RegClient;
-
+select * from client;
 
 
 --авторизаци€ клиента
@@ -85,14 +83,14 @@ as begin
 end;
 
 declare @nam nvarchar(35),@cat nvarchar(35),@pri nvarchar(20), @cou nvarchar(50),@des nvarchar(60);
-set @nam = 'тест';
-set @cat = 'тест';
-set @pri = 'тест';
-set @cou = 'тест';
-set @des = 'тест';
+set @nam = 'тест1';
+set @cat = 'тест1';
+set @pri = 'тест1';
+set @cou = 'тест1';
+set @des = 'тест1';
 EXEC ADD_GOOD @nam,@cat, @pri, @cou, @des;
 --drop procedure INSERT_GOOD
-
+select * from good;
 
 --удаление товара из корзины
 go 
@@ -103,7 +101,7 @@ as begin
 end;
 
 declare @ic int;
-set @ic = 2;      
+set @ic = 6;      
 EXEC DELETE_GOOD @ic;
 
 
@@ -157,7 +155,7 @@ as begin
 end;
 
 declare @paramprice nvarchar(30), @paramid int ;
-set @paramprice = '1000$';
+set @paramprice = '800$';
 set @paramid = 1;
 EXEC EDIT_GOODS @paramprice, @paramid;
 

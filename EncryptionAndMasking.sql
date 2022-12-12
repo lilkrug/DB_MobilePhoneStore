@@ -12,7 +12,7 @@ CREATE USER TestAdmin WITHOUT LOGIN;
 ALTER ROLE db_datareader ADD MEMBER Test; 
 ALTER ROLE db_datareader ADD MEMBER TestAdmin;
 
-GRANT UNMASK TO TestAdmin;  
+GRANT UNMASK TO TestAdmin;   
 GRANT SELECT ON worker TO Test;
  
 EXECUTE AS USER = 'TestAdmin';  
@@ -34,6 +34,8 @@ WHERE is_masked = 1;
 
 --Encryption
 --encrypt
+--шифрование SQL Server на уровне столбцов с использованием симметричных ключей
+--Создайте главный ключ базы данных для шифрования SQL Server на уровне столбцов
 GO
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'KruglikAlex';
 
@@ -43,7 +45,7 @@ SELECT name KeyName,
     algorithm_desc KeyAlgorithm
 FROM sys.symmetric_keys;
 
--- Создание сертификата для шифрования
+-- Создание сертификата для шифрования на уровне столбцов
 GO
 CREATE CERTIFICATE Certificate_test WITH SUBJECT = 'Protect my data';
 

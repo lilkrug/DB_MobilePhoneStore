@@ -48,7 +48,7 @@ end
 select * from good;
 exec XmlToGood;
 -----
---drop procedure XmlToGood;
+--drop procedure XmlToGood;	
 ------
 go
 Create Procedure DeleteXmlData @number int, @numberend int AS
@@ -64,7 +64,7 @@ End;
 
 declare @param int, @param2 int;
 set @param = 2;
-set @param2 = 3;
+set @param2 = 6;
 exec DeleteXmlData @param, @param2;
 
 --drop procedure DeleteXmlData

@@ -1,5 +1,6 @@
 Use MobilePhone;
 
+--заполнение 100000 строк
 go
 create procedure procedure_ADD_100_000_ROW
 AS
@@ -28,7 +29,7 @@ Exec procedure_ADD_100_000_ROW;
 --drop procedure procedure_ADD_100_000_ROW;
 
 
-
+--удаление клиентов
 go
 Create Procedure DeleteClient @number int, @numberend int AS
 Begin
